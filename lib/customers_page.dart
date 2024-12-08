@@ -3,18 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-class RequestsPage extends StatefulWidget {
-  const RequestsPage({super.key});
+class CustomersPage extends StatefulWidget {
+  const CustomersPage({super.key});
 
   @override
-  _RequestsPageState createState() => _RequestsPageState();
+  _CustomersPageState createState() => _CustomersPageState();
 }
 
-class _RequestsPageState extends State<RequestsPage> {
+class _CustomersPageState extends State<CustomersPage> {
   final String apiUrl =
-      "http://leonelh2024-001-site1.ntempurl.com/Solicitud/GetAllSolit";
+      "http://leonelh2024-001-site1.ntempurl.com/Customer/GetAllCustomer";
 
-  Future<List<dynamic>> fetchRequests() async {
+  Future<List<dynamic>> fetchCustomers() async {
     final prefs = await SharedPreferences.getInstance();
     final accessToken = prefs.getString('accessToken');
 
@@ -29,7 +29,7 @@ class _RequestsPageState extends State<RequestsPage> {
     if (response.statusCode == 200) {
       return jsonDecode(response.body);
     } else {
-      throw Exception('Error al cargar solicitudes');
+      throw Exception('Error al cargar clientes');
     }
   }
 
@@ -37,31 +37,39 @@ class _RequestsPageState extends State<RequestsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Mis Solicitudes'),
+        title: const Text('Clientes'),
       ),
       body: FutureBuilder<List<dynamic>>(
-        future: fetchRequests(),
+        future: fetchCustomers(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text('No hay solicitudes'));
+            return const Center(child: Text('No hay clientes'));
           } else {
             return ListView.builder(
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
-                final solicitud = snapshot.data![index];
+                final customer = snapshot.data![index];
                 return Card(
                   margin: const EdgeInsets.symmetric(
                       vertical: 10.0, horizontal: 16.0),
                   child: ListTile(
                     title: Text(
-                      'Solicitud ID: ${solicitud['solicitudId']}',
+                      '${customer['nombres']} ${customer['apellidos']}',
                       style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    subtitle: Text('Propósito: ${solicitud['proposito']}'),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('DNI: ${customer['dni']}'),
+                        Text('Fecha de Creación: ${customer['fechaCreacion']}'),
+                        Text(
+                            'Estado: ${customer['estado'] ? 'Activo' : 'Inactivo'}'),
+                      ],
+                    ),
                     trailing: Icon(
                       Icons.arrow_forward_ios,
                       color: Theme.of(context).brightness == Brightness.dark
@@ -69,8 +77,7 @@ class _RequestsPageState extends State<RequestsPage> {
                           : Colors.black,
                     ),
                     onTap: () {
-                      Navigator.pushNamed(context, '/requestInfo',
-                          arguments: solicitud);
+                      // Navegar a la página de información del cliente si es necesario
                     },
                   ),
                 );

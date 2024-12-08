@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_proyecto/pages/balances_page.dart';
-import 'package:flutter_proyecto/pages/create_new_request_page.dart';
+import 'package:flutter_proyecto/customers_page.dart';
+import 'package:flutter_proyecto/pages/accounts_page.dart';
 import 'package:flutter_proyecto/pages/home_page.dart';
-import 'package:flutter_proyecto/pages/profile_page.dart';
+import 'package:flutter_proyecto/pages/balances_page.dart';
+import 'package:flutter_proyecto/pages/prestamos_page.dart';
 import 'package:flutter_proyecto/pages/requests_page.dart';
 
 class MainWidget extends StatefulWidget {
@@ -16,10 +17,11 @@ class _MainWidgetState extends State<MainWidget> {
   int _selectedIndex = 0;
   static const List _pages = [
     HomePage(),
-    Balances(),
-    CreateNewRequestPage(),
+    BalancesPage(),
+    PrestamosPage(),
     RequestsPage(),
-    Profile(),
+    AccountsPage(),
+    CustomersPage(),
   ];
 
   void _onItemTapped(int index) {
@@ -48,21 +50,29 @@ class _MainWidgetState extends State<MainWidget> {
             label: 'Saldos',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.add),
-            label: 'Nueva Solicitud',
+            icon: Icon(Icons.monetization_on),
+            label: 'Préstamos',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.local_atm),
-            label: 'Mis Solicitudes',
+            icon: Icon(Icons.wallet),
+            label: 'Solicitudes',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Perfil',
+            icon: Icon(Icons.account_box),
+            label: 'Cuentas',
           ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.verified_user_outlined), label: 'Clientes'),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
+        selectedItemColor: Colors.blueAccent,
+        unselectedItemColor: Colors.grey,
+        backgroundColor: Colors.white,
+        showUnselectedLabels: true,
+        type: BottomNavigationBarType.fixed,
         onTap: _onItemTapped,
+        selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
+        unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.normal),
       ),
     );
   }

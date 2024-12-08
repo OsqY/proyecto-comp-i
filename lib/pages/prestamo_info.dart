@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-class RequestInfoPage extends StatelessWidget {
-  const RequestInfoPage({super.key});
+class PrestamoInfoPage extends StatelessWidget {
+  const PrestamoInfoPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final solicitud =
+    final prestamo =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Información de la Solicitud'),
+        title: const Text('Información del Préstamo'),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
@@ -33,35 +33,38 @@ class RequestInfoPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Solicitud ID: ${solicitud['solicitudId']}',
+                Text('Préstamo ID: ${prestamo['prestamoId']}',
                     style: const TextStyle(
                         fontSize: 20, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 10),
-                Text('Cliente ID: ${solicitud['customerId']}',
+                Text('Cliente ID: ${prestamo['clienteId']}',
                     style: const TextStyle(fontSize: 20)),
                 const SizedBox(height: 10),
-                Text('Propósito: ${solicitud['proposito']}',
+                Text('Tasa de Interés: ${prestamo['tasaInteres']}%',
                     style: const TextStyle(fontSize: 20)),
                 const SizedBox(height: 10),
-                Text('Tasa de Interés: ${solicitud['tasaInteres']}%',
+                Text('Plazo: ${prestamo['plazo']} meses',
                     style: const TextStyle(fontSize: 20)),
                 const SizedBox(height: 10),
-                Text('Plazo: ${solicitud['plazo']} meses',
-                    style: const TextStyle(fontSize: 20)),
-                const SizedBox(height: 10),
-                Text('Monto: \$${solicitud['monto']}',
+                Text('Monto: \$${prestamo['monto']}',
                     style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                         color: Colors.green)),
                 const SizedBox(height: 10),
-                Text('Fecha de Creación: ${solicitud['fechaCreacion']}',
+                Text('Saldo: \$${prestamo['saldo']}',
+                    style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.red)),
+                const SizedBox(height: 10),
+                Text('Fecha de Creación: ${prestamo['fechaCreacion']}',
                     style: const TextStyle(fontSize: 20)),
                 const SizedBox(height: 10),
-                Text('Fecha de Préstamo: ${solicitud['fechaPrestamo']}',
+                Text('Fecha de Préstamo: ${prestamo['fechaPrestamo']}',
                     style: const TextStyle(fontSize: 20)),
                 const SizedBox(height: 10),
-                Text('Estado: ${solicitud['estado'] ? 'Activo' : 'Inactivo'}',
+                Text('Estado: ${prestamo['estado'] ? 'Activo' : 'Inactivo'}',
                     style: const TextStyle(
                         fontSize: 20, fontWeight: FontWeight.bold)),
               ],

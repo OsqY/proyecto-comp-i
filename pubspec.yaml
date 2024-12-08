@@ -13,6 +13,8 @@ dependencies:
   flutter:
     sdk: flutter
   fl_chart: ^0.35.0
+  http: ^0.13.3
+  shared_preferences: ^2.0.6
 
 dev_dependencies:
   flutter_test:
