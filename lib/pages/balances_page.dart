@@ -14,9 +14,6 @@ class BalancesPage extends StatefulWidget {
 class _BalancesPageState extends State<BalancesPage> {
   final String prestamosUrl =
       "http://leonelh2024-001-site1.ntempurl.com/Prestamo/GetAllDue";
-  final String solicitudesUrl =
-      "http://leonelh2024-001-site1.ntempurl.com/Solicitud/GetAllSolit";
-
   Future<List<dynamic>> fetchPrestamos() async {
     final prefs = await SharedPreferences.getInstance();
     final accessToken = prefs.getString('accessToken');
@@ -33,25 +30,6 @@ class _BalancesPageState extends State<BalancesPage> {
       return jsonDecode(response.body);
     } else {
       throw Exception('Error al cargar préstamos');
-    }
-  }
-
-  Future<List<dynamic>> fetchSolicitudes() async {
-    final prefs = await SharedPreferences.getInstance();
-    final accessToken = prefs.getString('accessToken');
-
-    final response = await http.get(
-      Uri.parse(solicitudesUrl),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-        'Authorization': 'Bearer $accessToken',
-      },
-    );
-
-    if (response.statusCode == 200) {
-      return jsonDecode(response.body);
-    } else {
-      throw Exception('Error al cargar solicitudes');
     }
   }
 

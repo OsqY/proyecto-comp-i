@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_proyecto/customers_page.dart';
+import 'package:flutter_proyecto/pages/customers_page.dart';
 import 'package:flutter_proyecto/pages/accounts_page.dart';
 import 'package:flutter_proyecto/pages/home_page.dart';
 import 'package:flutter_proyecto/pages/balances_page.dart';
@@ -34,7 +34,7 @@ class _MainWidgetState extends State<MainWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Proyecto'),
+        title: const Text('Aplicación Financiera'),
       ),
       body: Center(
         child: _pages.elementAt(_selectedIndex),

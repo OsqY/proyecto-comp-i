@@ -29,9 +29,6 @@ class LoginPage extends StatelessWidget {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString('accessToken', accessToken);
       await prefs.setString('refreshToken', refreshToken);
-
-      // Navegar a la página principal
-      // Navigator.pushReplacementNamed(context, '/home');
     } else {
       throw Exception('Error al iniciar sesión');
     }

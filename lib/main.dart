@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_proyecto/customers_page.dart';
+import 'package:flutter_proyecto/pages/customers_page.dart';
 import 'package:flutter_proyecto/pages/accounts_info.dart';
 import 'package:flutter_proyecto/pages/accounts_page.dart';
 import 'package:flutter_proyecto/pages/login_page.dart';
